@@ -48,27 +48,25 @@ end
 # end
 
 def largest_contiguous_subsum(arr)
+    # debugger
 
-    largest_sum = 0
-    current_sum = 0
+    current_sum = 0    # -5
+    largest_sum = arr[0]    # -5
 
-    (0...arr.length - 1).each_with_index do |i|
-        debugger
-        if (arr[i] + arr[i + 1]) > (arr[i] + arr[i + 1] + arr[i + 2])
-            current_sum += (arr[i] + arr[i + 1])
-
-        # current_sum += arr[i] + arr[i + 1] || current_sum += arr[i] + arr[i + 1] + arr[i + 2]
-
-        if current_sum > largest_sum
-            largest_sum = current_sum
+    (0...arr.length).each_with_index do |i|
+        current_sum += arr[i]           # -5 + -1 => -6 
+        if current_sum > largest_sum    # if -6 > -5
+            largest_sum = current_sum   
+        elsif current_sum < 0           # if -6 < 0
+            current_sum = 0             # current = 0
+            next
         end
     end
-
     largest_sum
 end
 
-# list = [5, 3, -7]
-# p largest_contiguous_subsum(list) # => 8
+list = [5, 3, -7]
+p largest_contiguous_subsum(list) # => 8
 
 list = [2, 3, -6, 7, -6, 7]
 p largest_contiguous_subsum(list) # => 8 (from [7, -6, 7])
